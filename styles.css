@@ -1,0 +1,1411 @@
+/* =========================================================
+   JUICE WEBSITE — MAIN STYLES
+   ========================================================= */
+
+
+/* =========================================================
+   1. RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    overflow: hidden;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    background: #31D677;
+}
+
+button,
+a {
+    font: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================================================
+   2. COLOR VARIABLES
+   ========================================================= */
+
+:root {
+    --green-1: #31D677;
+    --green-2: #259B57;
+
+    --pink-1: #FF4F78;
+    --pink-2: #D92A54;
+
+    --orange-1: #FFA94D;
+    --orange-2: #FF7E3D;
+
+    --purple-1: #A259FF;
+    --purple-2: #6A0DAD;
+
+    --white: #FFFFFF;
+    --white-soft: #FFFFFF61;
+
+    --transition-speed: 0.6s;
+}
+
+
+/* =========================================================
+   3. MAIN PAGE
+   ========================================================= */
+
+#main-wrapper {
+    position: relative;
+
+    width: 100%;
+    height: 100dvh;
+
+    overflow: hidden;
+
+    background-image:
+        radial-gradient(
+            at center center,
+            var(--green-1) 30%,
+            var(--green-2) 72%
+        );
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    transition: background-image 0.5s linear;
+}
+
+
+/* =========================================================
+   4. WHITE RADIAL SPOTLIGHT
+   Based on the original Elementor CSS
+   ========================================================= */
+
+#main-wrapper::after {
+    content: "";
+
+    position: absolute;
+
+    top: -50dvh;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 100%;
+    height: 100dvw;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0.2) 10%,
+            rgba(255, 255, 255, 0) 50%
+        );
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+/* =========================================================
+   5. HEADER
+   ========================================================= */
+
+.site-header {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 26px 48px;
+
+    display: flex;
+    align-items: center;
+
+    z-index: 100;
+}
+
+
+/* -------------------------
+   Logo
+   ------------------------- */
+
+.logo-link {
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.site-logo {
+    display: block;
+
+    width: 142px;
+    height: auto;
+}
+
+
+/* -------------------------
+   Main navigation
+   ------------------------- */
+
+.main-navigation {
+    display: flex;
+    align-items: center;
+
+    gap: 34px;
+
+    margin-left: 42px;
+}
+
+.nav-link {
+    color: var(--white);
+
+    font-size: 21px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.nav-link:hover {
+    opacity: 0.75;
+    transform: translateY(-1px);
+}
+
+
+/* -------------------------
+   Order button
+   ------------------------- */
+
+.order-button {
+    margin-left: auto;
+
+    min-width: 220px;
+    height: 62px;
+
+    padding: 0 22px 0 27px;
+
+    border-radius: 999px;
+
+    background: var(--white);
+
+    color: #111111;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 21px;
+    font-weight: 500;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.order-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.order-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 34px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   6. PRODUCT SLIDER
+   ========================================================= */
+
+#img-container {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: 10;
+}
+
+
+/* =========================================================
+   7. INDIVIDUAL SLIDES
+   ========================================================= */
+
+.slide {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: scale(0.5);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform-origin: center center;
+
+    transition:
+        transform var(--transition-speed) cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.35s ease,
+        visibility 0s linear 0.6s;
+
+    z-index: 1;
+}
+
+
+/*
+   Active slide
+
+   JavaScript will add/remove .active.
+*/
+
+.slide.active {
+    transform: scale(1);
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transition:
+        transform var(--transition-speed) cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.35s ease;
+    
+    z-index: 5;
+}
+
+
+/* =========================================================
+   8. LARGE BACKGROUND WORD
+   ========================================================= */
+
+.background-word {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: max-content;
+
+    color: var(--white);
+
+    font-family:
+        Impact,
+        Haettenschweiler,
+        "Arial Narrow Bold",
+        sans-serif;
+
+    font-size: clamp(8rem, 17vw, 15rem);
+
+    font-weight: 900;
+
+    line-height: 0.8;
+
+    letter-spacing: -0.045em;
+
+    white-space: nowrap;
+
+    user-select: none;
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   9. PRODUCT SPLASH
+   ========================================================= */
+
+.product-splash {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(62vw, 850px);
+
+    height: auto;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   10. PRODUCT BOTTLE
+   ========================================================= */
+
+.product-bottle {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 270px;
+    height: auto;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    z-index: 4;
+
+    filter:
+        drop-shadow(
+            0 18px 18px rgba(0, 0, 0, 0.12)
+        );
+}
+
+
+/*
+   Individual bottle sizing.
+
+   The original source images have different canvas
+   dimensions, so these adjustments compensate for them.
+*/
+
+.slide[data-slide="0"] .product-bottle {
+    width: 275px;
+}
+
+.slide[data-slide="1"] .product-bottle {
+    width: 275px;
+}
+
+.slide[data-slide="2"] .product-bottle {
+    width: 270px;
+}
+
+.slide[data-slide="3"] .product-bottle {
+    width: 270px;
+}
+
+
+/* =========================================================
+   11. HERO ACTION BUTTONS
+   ========================================================= */
+
+.hero-actions {
+    position: absolute;
+
+    top: 166px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+
+    gap: 28px;
+
+    z-index: 100;
+}
+
+
+/* -------------------------
+   Main buttons
+   ------------------------- */
+
+.hero-button {
+    height: 66px;
+
+    padding: 0 32px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    font-size: 22px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease;
+}
+
+
+/* Products */
+
+.hero-button-primary {
+    color: #111111;
+
+    background: var(--white);
+}
+
+
+/* Contact */
+
+.hero-button-secondary {
+    color: var(--white);
+
+    background: rgba(255, 255, 255, 0.28);
+}
+
+
+.hero-button:hover {
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   12. SOCIAL MEDIA LINKS
+   ========================================================= */
+
+.social-links {
+    position: absolute;
+
+    left: 48px;
+    bottom: 46px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 34px;
+
+    z-index: 100;
+}
+
+
+.social-link {
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--white);
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-2px);
+    opacity: 0.75;
+}
+
+
+/*
+   Temporary text-based icon styling.
+
+   We will replace these with proper SVG/icon
+   implementations once the layout is locked.
+*/
+
+.social-icon {
+    color: var(--white);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+.instagram-icon {
+    width: 23px;
+    height: 23px;
+
+    border: 2px solid white;
+    border-radius: 7px;
+
+    font-size: 0;
+}
+
+.instagram-icon::before {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.facebook-icon {
+    font-family: Arial, sans-serif;
+
+    font-size: 24px;
+}
+
+.dribbble-icon {
+    font-size: 24px;
+}
+
+.behance-icon {
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   13. CHOOSE YOUR SIZE
+   ========================================================= */
+
+.size-navigation {
+    position: absolute;
+
+    left: 50%;
+    bottom: 45px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 24px;
+
+    z-index: 100;
+
+    white-space: nowrap;
+}
+
+
+.size-line {
+    display: block;
+
+    width: 70px;
+    height: 2px;
+
+    background: rgba(255, 255, 255, 0.9);
+}
+
+
+.size-button {
+    border: 0;
+
+    background: transparent;
+
+    color: var(--white);
+
+    font-family:
+        Impact,
+        Haettenschweiler,
+        "Arial Narrow Bold",
+        sans-serif;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    padding: 0;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   14. SLIDER DOTS
+   ========================================================= */
+
+/*
+   Hidden because the original screenshots do not show
+   conventional slider dots.
+   
+   The JavaScript can still use these controls.
+*/
+
+.slider-controls {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    display: none;
+
+    gap: 10px;
+
+    z-index: 150;
+}
+
+
+.slider-dot {
+    width: 8px;
+    height: 8px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: var(--white-soft);
+
+    cursor: pointer;
+}
+
+.slider-dot.active {
+    background: var(--white);
+}
+
+
+/* =========================================================
+   15. TABLET
+   768px — 1024px
+   ========================================================= */
+
+@media (max-width: 1024px) {
+
+    /* ---------------------------------
+       Spotlight
+       --------------------------------- */
+
+    #main-wrapper::after {
+        top: -30dvh;
+
+        width: 120%;
+        height: 120dvh;
+
+        background:
+            radial-gradient(
+                ellipse at center,
+                rgba(255, 255, 255, 0.15) 0%,
+                rgba(255, 255, 255, 0.15) 15%,
+                rgba(255, 255, 255, 0) 60%
+            );
+    }
+
+
+    /* ---------------------------------
+       Header
+       --------------------------------- */
+
+    .site-header {
+        padding: 24px 32px;
+    }
+
+    .site-logo {
+        width: 115px;
+    }
+
+    .main-navigation {
+        gap: 24px;
+        margin-left: 28px;
+    }
+
+    .nav-link {
+        font-size: 17px;
+    }
+
+    .order-button {
+        min-width: 170px;
+        height: 52px;
+
+        font-size: 17px;
+    }
+
+    .order-arrow {
+        font-size: 28px;
+    }
+
+
+    /* ---------------------------------
+       Hero buttons
+       --------------------------------- */
+
+    .hero-actions {
+        top: 145px;
+
+        gap: 20px;
+    }
+
+    .hero-button {
+        height: 55px;
+
+        padding: 0 27px;
+
+        font-size: 18px;
+    }
+
+
+    /* ---------------------------------
+       Product
+       --------------------------------- */
+
+    .background-word {
+        font-size: clamp(7rem, 18vw, 11rem);
+    }
+
+    .product-splash {
+        width: min(70vw, 700px);
+    }
+
+    .product-bottle {
+        width: 225px;
+    }
+
+    .slide[data-slide="0"] .product-bottle,
+    .slide[data-slide="1"] .product-bottle,
+    .slide[data-slide="2"] .product-bottle,
+    .slide[data-slide="3"] .product-bottle {
+        width: 225px;
+    }
+
+
+    /* ---------------------------------
+       Bottom
+       --------------------------------- */
+
+    .social-links {
+        left: 32px;
+        bottom: 35px;
+
+        gap: 25px;
+    }
+
+    .size-navigation {
+        bottom: 35px;
+
+        gap: 18px;
+    }
+
+    .size-line {
+        width: 55px;
+    }
+
+    .size-button {
+        font-size: 18px;
+    }
+}
+
+
+/* =========================================================
+   16. MOBILE
+   Up to 767px
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    /* ---------------------------------
+       Main
+       --------------------------------- */
+
+    #main-wrapper {
+        min-height: 100dvh;
+    }
+
+
+    /* ---------------------------------
+       Spotlight
+       Original mobile positioning
+       --------------------------------- */
+
+    #main-wrapper::after {
+        left: 65%;
+
+        top: -20dvh;
+
+        width: 150%;
+        height: 140dvh;
+
+        background:
+            radial-gradient(
+                ellipse at center,
+                rgba(255, 255, 255, 0.15) 0%,
+                rgba(255, 255, 255, 0.15) 20%,
+                rgba(255, 255, 255, 0) 70%
+            );
+    }
+
+
+    /* ---------------------------------
+       Header
+       --------------------------------- */
+
+    .site-header {
+        top: 0;
+
+        padding: 25px 30px;
+
+        align-items: center;
+    }
+
+
+    .site-logo {
+        width: 145px;
+    }
+
+
+    .main-navigation {
+        gap: 22px;
+
+        margin-left: 25px;
+    }
+
+
+    .nav-link {
+        font-size: 19px;
+
+        font-weight: 600;
+    }
+
+
+    /*
+       Hide Products from the top navigation
+       on smaller screens.
+
+       The screenshot shows Home / Contact / Place order.
+    */
+
+    .main-navigation .nav-link:nth-child(2) {
+        display: none;
+    }
+
+
+    /* ---------------------------------
+       Order button
+       --------------------------------- */
+
+    .order-button {
+        min-width: 170px;
+
+        height: 61px;
+
+        padding: 0 20px 0 25px;
+
+        font-size: 20px;
+    }
+
+    .order-arrow {
+        font-size: 32px;
+    }
+
+
+    /* ---------------------------------
+       Hero action buttons
+       --------------------------------- */
+
+    .hero-actions {
+        top: 164px;
+
+        gap: 28px;
+    }
+
+
+    .hero-button {
+        height: 67px;
+
+        padding: 0 30px;
+
+        font-size: 21px;
+    }
+
+
+    /* ---------------------------------
+       Large word
+       --------------------------------- */
+
+    .background-word {
+        top: 52%;
+
+        font-size: clamp(
+            7rem,
+            34vw,
+            12rem
+        );
+
+        letter-spacing: -0.05em;
+    }
+
+
+    /* ---------------------------------
+       Splash
+       --------------------------------- */
+
+    .product-splash {
+        left: 50%;
+        top: 52%;
+
+        width: 650px;
+
+        max-width: none;
+    }
+
+
+    /* ---------------------------------
+       Bottle
+       --------------------------------- */
+
+    .product-bottle {
+        left: 50%;
+        top: 52%;
+
+        width: 285px;
+    }
+
+
+    .slide[data-slide="0"] .product-bottle {
+        width: 285px;
+    }
+
+    .slide[data-slide="1"] .product-bottle {
+        width: 285px;
+    }
+
+    .slide[data-slide="2"] .product-bottle {
+        width: 280px;
+    }
+
+    .slide[data-slide="3"] .product-bottle {
+        width: 280px;
+    }
+
+
+    /* ---------------------------------
+       Bottom social links
+       --------------------------------- */
+
+    .social-links {
+        left: 50%;
+
+        bottom: 112px;
+
+        transform: translateX(-50%);
+
+        gap: 37px;
+    }
+
+
+    .social-link {
+        width: 27px;
+        height: 27px;
+    }
+
+
+    /* ---------------------------------
+       Choose your size
+       --------------------------------- */
+
+    .size-navigation {
+        bottom: 46px;
+
+        gap: 25px;
+    }
+
+
+    .size-line {
+        width: 44px;
+        height: 2px;
+    }
+
+
+    .size-button {
+        font-size: 22px;
+    }
+}
+
+
+/* =========================================================
+   17. SMALL MOBILE
+   Up to 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    /* ---------------------------------
+       Header
+       --------------------------------- */
+
+    .site-header {
+        padding: 20px 18px;
+    }
+
+
+    .site-logo {
+        width: 105px;
+    }
+
+
+    .main-navigation {
+        gap: 14px;
+
+        margin-left: 16px;
+    }
+
+
+    .nav-link {
+        font-size: 15px;
+    }
+
+
+    .order-button {
+        min-width: 118px;
+
+        width: 118px;
+        height: 48px;
+
+        padding: 0 13px 0 15px;
+
+        font-size: 14px;
+    }
+
+
+    .order-arrow {
+        font-size: 25px;
+    }
+
+
+    /* ---------------------------------
+       Hero buttons
+       --------------------------------- */
+
+    .hero-actions {
+        top: 132px;
+
+        gap: 18px;
+    }
+
+
+    .hero-button {
+        height: 48px;
+
+        padding: 0 23px;
+
+        font-size: 16px;
+    }
+
+
+    /* ---------------------------------
+       Product
+       --------------------------------- */
+
+    .background-word {
+        top: 51%;
+
+        font-size: clamp(
+            6rem,
+            34vw,
+            8.5rem
+        );
+    }
+
+
+    .product-splash {
+        top: 51%;
+
+        width: 560px;
+    }
+
+
+    .product-bottle {
+        top: 51%;
+
+        width: 235px;
+    }
+
+
+    .slide[data-slide="0"] .product-bottle {
+        width: 235px;
+    }
+
+    .slide[data-slide="1"] .product-bottle {
+        width: 235px;
+    }
+
+    .slide[data-slide="2"] .product-bottle {
+        width: 230px;
+    }
+
+    .slide[data-slide="3"] .product-bottle {
+        width: 230px;
+    }
+
+
+    /* ---------------------------------
+       Social
+       --------------------------------- */
+
+    .social-links {
+        bottom: 83px;
+
+        gap: 28px;
+    }
+
+
+    .social-link {
+        width: 23px;
+        height: 23px;
+    }
+
+
+    /* ---------------------------------
+       Bottom text
+       --------------------------------- */
+
+    .size-navigation {
+        bottom: 32px;
+
+        gap: 14px;
+    }
+
+
+    .size-line {
+        width: 40px;
+    }
+
+
+    .size-button {
+        font-size: 18px;
+    }
+}
+
+
+/* =========================================================
+   18. VERY SMALL MOBILE
+   Up to 360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .site-header {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+
+    .site-logo {
+        width: 88px;
+    }
+
+
+    .main-navigation {
+        margin-left: 10px;
+        gap: 10px;
+    }
+
+
+    .nav-link {
+        font-size: 13px;
+    }
+
+
+    .order-button {
+        min-width: 105px;
+        width: 105px;
+
+        height: 43px;
+
+        padding-left: 12px;
+        padding-right: 10px;
+
+        font-size: 12px;
+    }
+
+
+    .order-arrow {
+        font-size: 22px;
+    }
+
+
+    .hero-actions {
+        top: 120px;
+
+        gap: 13px;
+    }
+
+
+    .hero-button {
+        height: 44px;
+
+        padding: 0 18px;
+
+        font-size: 14px;
+    }
+
+
+    .background-word {
+        font-size: 5.8rem;
+    }
+
+
+    .product-splash {
+        width: 500px;
+    }
+
+
+    .product-bottle {
+        width: 210px;
+    }
+
+
+    .slide[data-slide="0"] .product-bottle,
+    .slide[data-slide="1"] .product-bottle,
+    .slide[data-slide="2"] .product-bottle,
+    .slide[data-slide="3"] .product-bottle {
+        width: 210px;
+    }
+
+
+    .social-links {
+        bottom: 73px;
+
+        gap: 23px;
+    }
+
+
+    .size-navigation {
+        bottom: 27px;
+
+        gap: 10px;
+    }
+
+
+    .size-line {
+        width: 30px;
+    }
+
+
+    .size-button {
+        font-size: 16px;
+    }
+}
+
+
+/* =========================================================
+   19. LANDSCAPE MOBILE
+   ========================================================= */
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+    .site-header {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+
+    .site-logo {
+        width: 90px;
+    }
+
+
+    .nav-link {
+        font-size: 14px;
+    }
+
+
+    .order-button {
+        height: 42px;
+        min-width: 130px;
+
+        font-size: 14px;
+    }
+
+
+    .hero-actions {
+        top: 90px;
+    }
+
+
+    .hero-button {
+        height: 42px;
+
+        font-size: 14px;
+    }
+
+
+    .background-word {
+        font-size: 7rem;
+    }
+
+
+    .product-splash {
+        width: 450px;
+    }
+
+
+    .product-bottle {
+        width: 190px;
+    }
+
+
+    .social-links {
+        bottom: 18px;
+        left: 25px;
+    }
+
+
+    .size-navigation {
+        bottom: 18px;
+    }
+}
+
+
+/* =========================================================
+   20. ACCESSIBILITY / REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
